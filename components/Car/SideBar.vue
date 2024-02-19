@@ -31,7 +31,7 @@ const updateModal = (key) => {
   modal.value[key] = !modal.value[key];
 };
 
-const onChangeLocation = () => {
+const onChangeLocation = async() => {
   if (!city.value) return;
   if (!isNaN(parseInt(city.value))) {
     throw createError({
@@ -40,6 +40,8 @@ const onChangeLocation = () => {
     });
   }
   updateModal("location");
+  // await fetch(`https://localhost:3000/api/city/${city.value}car`);
+
   navigateTo(`/city/${city.value}/car/${route.params.make}`);
   city.value = "";
 };

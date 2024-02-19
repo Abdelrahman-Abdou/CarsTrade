@@ -12,7 +12,6 @@ const login = async () => {
         console.log(data)
     }
 }
-const user = useSupabaseUser()
 </script>
 <template>
     <div class="min-h-screen bg-gray-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -46,6 +45,7 @@ const user = useSupabaseUser()
                         </button>
                     </div>
                 </form>
+                <NuxtLink to="./Signup">Don't have account? Sign up</NuxtLink>
             </div>
         </div>
     </div>

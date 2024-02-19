@@ -13,8 +13,20 @@
   
 <script setup>
 const supabase = useSupabaseClient()
+
 const signout = async () => {
+    //  1-make sure that user.value is null
+    // 2- remove jwt from cookie browser
+    //3- redirect to login page
     const { error } = await supabase.auth.signOut()
+    navigateTo('/login')
+    if(error){
+        console.log(error)
+        return createError({
+            statusCode: 500,
+            message: error.message,
+        })
+    }
 
 }
 </script>

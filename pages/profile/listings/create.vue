@@ -1,6 +1,8 @@
 <script setup>
 definePageMeta({
   layout: "custom",
+  middleware: ['auth']
+
 });
 
 const { makes } = useCars();
