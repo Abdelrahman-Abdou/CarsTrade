@@ -3,29 +3,24 @@ import axios from 'axios';
 
 const route = useRoute()
 const city = route.params.city
-// , {
-// 
-// }
-// const { data, error } =  useAsyncData("fetchCars", async () => {
-//   const res = await axios.get(`/api/cars/${city}`);
-//   return res
+const { $api } = useNuxtApp()
 
-// }
-// );
-const cars = ref([])
-const getCars = async () => {
-  const res = await axios.get(`/api/cars/${city}`, {
-    params: {
-      minPrice: route.query.minPrice,
-      maxPrice: route.query.maxPrice,
-      make: route.params.make
-    },
+const { data: cars, error } = useAsyncData("fetchCars", async () => {
+  let params = {
+    minPrice: route.query?.minPrice,
+    maxPrice: route.query?.maxPrice,
+    make: route.params?.make
+  }
+  const res = await $api.cars.fetchData(city, params)
+  return res
 
-  });
-  cars.value = res.data
-  return res.data
+}, {
+  watch: [() => (route.query?.minPrice),
+
+  () => route.query?.maxPrice, () => route.params?.make]
 }
-getCars()
+);
+
 </script>
 
 <template>

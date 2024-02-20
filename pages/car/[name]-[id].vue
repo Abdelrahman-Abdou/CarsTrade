@@ -1,39 +1,31 @@
 <script setup>
 const route = useRoute();
-const { cars } = useCars();
 const { toTitleCase } = useUtilities();
 useHead({
   title: toTitleCase(route.params.name),
 });
+const {$api} = useNuxtApp()
+const { data: details } = useAsyncData("fetchDetails", async () => {
+  const res = await $api.cars.fetchSingleData(route.params.id)
+  console.log(res)
+  return res
+},
+{
+  watch:[() => route.params.id],
+  immediate:true
+}
 
-definePageMeta({
-  validate({ params }) {
-    const { cars } = useCars();
-    const car = cars.find((c) => c.id === parseInt(params.id));
-    if (!car) {
-      throw createError({
-        statusCode: 404,
-        message: `Car with ID of ${route.params.id} does not exist`,
-      });
-    }
-  },
-});
-
-const car = computed(() => {
-  return cars.find((c) => {
-    return c.id === parseInt(route.params.id);
-  });
-});
+);
 
 definePageMeta({
   layout: "custom",
 });
 </script>
 <template>
-  <div>
-    <CarDetailHero :car="car" />
-    <CarDetailAttributes :features="car.features" />
-    <CarDetailDescription :description="car.description" />
+  <div v-if="details">
+    <CarDetailHero :car="details" />
+    <CarDetailAttributes :features="details.features" />
+    <CarDetailDescription :description="details.description" />
     <CarDetailContact />
   </div>
 </template>
