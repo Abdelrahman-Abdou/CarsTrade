@@ -1,6 +1,6 @@
 import HttpFactory from "../factory";
 
-class WarehouseModule extends HttpFactory {
+class carsModule extends HttpFactory {
   Resource = "/cars";
 
   async fetchData(city: any, params?: any): Promise<any> {
@@ -14,16 +14,7 @@ class WarehouseModule extends HttpFactory {
       },
     });
   }
-  async fetchSingleData(id: any): Promise<{ data: any }> {
-    console.log("fetchSingleData", id);
-    return await this.call({
-      url: `${this.Resource}/${id}`,
-      options: {
-        method: "GET",
-       
-      },
-    });
-  }
+ 
 }
 
-export default WarehouseModule;
+export default carsModule;

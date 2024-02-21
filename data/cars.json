@@ -47,7 +47,7 @@
     "make": "Land Rover",
     "city": "Toronto",
     "miles": "0",
-    "features": ["No Accidents", "Low KM", "Vehicle Detailed", "Leather Interior"],
+    "features": ["No Accidents", "high KM", "Vehicle Detailed", "Leather Interior"],
     "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis odio et"
   },
   {

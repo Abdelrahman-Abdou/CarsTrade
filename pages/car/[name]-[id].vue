@@ -6,7 +6,7 @@ useHead({
 });
 const {$api} = useNuxtApp()
 const { data: details } = useAsyncData("fetchDetails", async () => {
-  const res = await $api.cars.fetchSingleData(route.params.id)
+  const res = await $api.car.fetchSingleData(route.params.id)
   console.log(res)
   return res
 },
