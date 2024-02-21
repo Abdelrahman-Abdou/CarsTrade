@@ -27,6 +27,7 @@ model Car {
   city          String
   price         Int
   image         String
+  year          Int
 }
 
 model Message {
