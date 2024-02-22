@@ -7,8 +7,7 @@ definePageMeta({
 const user = useSupabaseUser()
 const { $api } = useNuxtApp()
 const { data: Listings, error } = useAsyncData('userListings', async () => {
-  const res = await $api.car.fetchUserListings({ listerId: 111 })
-  // const res = await $api.car.fetchUserListings({ listerId: user.value.id })
+  const res = await $api.car.fetchUserListings({ listerId: user.value.id })
   return res
 })
 </script>
