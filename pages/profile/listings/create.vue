@@ -68,18 +68,24 @@ const inputs = [
   },
   {
     id: 4,
+    title: "Price *",
+    name: "price",
+    placeholder: "10000",
+  },
+  {
+    id: 5,
     title: "City *",
     name: "city",
     placeholder: "Austin",
   },
   {
-    id: 5,
+    id: 6,
     title: "Number of Seats *",
     name: "seats",
     placeholder: "5",
   },
   {
-    id: 6,
+    id: 7,
     title: "Features *",
     name: "features",
     placeholder: "Leather Interior, No Accidents",
