@@ -1,4 +1,7 @@
 <script setup>
+
+const user = useSupabaseUser()
+console.log(user.value)
 definePageMeta({
   layout: "custom",
   middleware: ['auth']
@@ -21,11 +24,29 @@ const info = useState("adInfo", () => {
     image: null,
   };
 });
-
+const { $api } = useNuxtApp()
 const onChangeInput = (data, name) => {
   info.value[name] = data;
-};
+  console.log(info.value)
 
+
+};
+const submitNewMake = async () => {
+  await $api.car.AddListing({
+    make: info.value.make,
+    model: info.value.model,
+    year: +info.value.year,
+    miles: +info.value.miles,
+    price: +info.value.price,
+    city: info.value.city,
+    numberOfSeats: +info.value.seats,
+    features: [info.value.features],
+    description: info.value.description,
+    image: '1111',
+    listerId: user.value.id,
+    name:"Car Gamda"
+  })
+}
 const inputs = [
   {
     id: 1,
@@ -73,27 +94,12 @@ const inputs = [
       <h1 class="text-6xl">Create a New Listing</h1>
     </div>
     <div class="shadow rounded p-3 mt-5 flex flex-wrap justify-between">
-      <CarAdSelect
-        title="Make *"
-        :options="makes"
-        name="make"
-        @change-input="onChangeInput"
-      />
-      <CarAdInput
-        v-for="input in inputs"
-        :key="input.id"
-        :title="input.title"
-        :name="input.name"
-        :placeholder="input.placeholder"
-        @change-input="onChangeInput"
-      />
-      <CarAdTextarea
-        title="Description *"
-        name="description"
-        placeholder=""
-        @change-input="onChangeInput"
-      />
+      <CarAdSelect title="Make *" :options="makes" name="make" @change-input="onChangeInput" />
+      <CarAdInput v-for="input in inputs" :key="input.id" :title="input.title" :name="input.name"
+        :placeholder="input.placeholder" @change-input="onChangeInput" />
+      <CarAdTextarea title="Description *" name="description" placeholder="" @change-input="onChangeInput" />
       <CarAdImage @change-input="onChangeInput" />
     </div>
+    <button @click="submitNewMake" class="bg-blue-400 text-white px-6 py-3 w-full mt-2 rounded-md ">Submit</button>
   </div>
 </template>
