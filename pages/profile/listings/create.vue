@@ -31,22 +31,6 @@ const onChangeInput = (data, name) => {
 
 
 };
-const submitNewMake = async () => {
-  await $api.car.AddListing({
-    make: info.value.make,
-    model: info.value.model,
-    year: +info.value.year,
-    miles: +info.value.miles,
-    price: +info.value.price,
-    city: info.value.city,
-    numberOfSeats: +info.value.seats,
-    features: [info.value.features],
-    description: info.value.description,
-    image: '1111',
-    listerId: user.value.id,
-    name:"Car Gamda"
-  })
-}
 const inputs = [
   {
     id: 1,
@@ -91,6 +75,43 @@ const inputs = [
     placeholder: "Leather Interior, No Accidents",
   },
 ];
+const errMessage = ref('')
+const isButtonDisable = computed(() => {
+  for (let key in info.value) {
+    console.log(info.value[key])
+    if (!info.value[key]) return true;
+  }
+  return false;
+})
+const submitNewMake = async () => {
+  try {
+    const res = await $api.car.AddListing({
+      make: info.value.make,
+      model: info.value.model,
+      year: +info.value.year,
+      miles: +info.value.miles,
+      price: +info.value.price,
+      city: info.value.city,
+      numberOfSeats: +info.value.seats,
+      features: [info.value.features],
+      description: info.value.description,
+      // image: '1111',
+      listerId: user.value.id,
+      name: `${info.value.make} ${info.value.model}`
+    })
+    if (res) {
+      navigateTo("/profile/listings")
+    }
+  } catch (error) {
+    errMessage.value = error.statusMessage
+    createError({
+      statusCode: 400,
+      message: error.message,
+    })
+  }
+
+}
+
 </script>
 
 
@@ -106,6 +127,8 @@ const inputs = [
       <CarAdTextarea title="Description *" name="description" placeholder="" @change-input="onChangeInput" />
       <CarAdImage @change-input="onChangeInput" />
     </div>
-    <button @click="submitNewMake" class="bg-blue-400 text-white px-6 py-3 w-full mt-2 rounded-md ">Submit</button>
+    <p class="text-red-300">{{ errMessage }}</p>
+    <button :disabled="isButtonDisable" @click="submitNewMake" class="text-white px-6 py-3 w-full mt-2 rounded-mdب"
+      :class="isButtonDisable ? 'bg-blue-200' : 'bg-blue-400 '">Submit</button>
   </div>
 </template>
