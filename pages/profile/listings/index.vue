@@ -4,10 +4,14 @@ definePageMeta({
   middleware: ['auth']
 
 });
-
-const { listings } = useCars();
+const user = useSupabaseUser()
+const { $api } = useNuxtApp()
+const { data: Listings, error } = useAsyncData('userListings', async () => {
+  const res = await $api.car.fetchUserListings({ listerId: 111 })
+  // const res = await $api.car.fetchUserListings({ listerId: user.value.id })
+  return res
+})
 </script>
-
 <template>
   <div>
     <div class="flex justify-between mt-24 items-center">
@@ -26,7 +30,7 @@ const { listings } = useCars();
         ">+</NuxtLink>
     </div>
     <div class="shadow rounded p-3 mt-5">
-      <CarListingCard v-for="listing in listings" :key="listing.id" :listing="listing" />
+      <CarListingCard v-for="listing in Listings" :key="listing.id" :listing="listing" />
     </div>
   </div>
 </template>
