@@ -2,6 +2,10 @@
 const props = defineProps({
   listing: Object,
 });
+const { $api } = useNuxtApp()
+const deleteListingHandler = async (id) => {
+  await $api.car.deleteListing({ listingId: id })
+}
 </script>
 
 <template>
@@ -14,12 +18,8 @@ const props = defineProps({
       </div>
     </div>
     <div class="p-3 flex">
-      <NuxtLink
-        class="text-blue-400 mr-4"
-        :to="`/profile/listings/view/${listing.id}`"
-        >View</NuxtLink
-      >
-      <p class="text-red-400 cursor-pointer">Delete</p>
+      <NuxtLink class="text-blue-400 mr-4" :to="`/profile/listings/view/${listing.id}`">View</NuxtLink>
+      <p class="text-red-400 cursor-pointer" @click="deleteListingHandler(listing.id)">Delete</p>
     </div>
   </div>
 </template>
