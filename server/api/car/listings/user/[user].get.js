@@ -13,6 +13,6 @@ export default defineEventHandler(async (e) => {
       price: true,
     },
   });
-  console.log(listing);
+  // console.log(listing);
   return listing;
 });

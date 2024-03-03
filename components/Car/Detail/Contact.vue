@@ -29,7 +29,7 @@ const submitHandler = async () => {
     email: email.value,
     phone: phone.value,
     message: message.value,
-    listingId: 4,
+    listingId: listingId.value,
 
   }
   try {

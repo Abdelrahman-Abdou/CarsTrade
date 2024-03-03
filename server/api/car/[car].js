@@ -15,6 +15,6 @@ export default defineEventHandler(async (e) => {
       message: "Car not found",
     });
   }
-  console.log(car);
+  // console.log(car);
   return car;
 });

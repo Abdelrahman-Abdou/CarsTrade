@@ -11,7 +11,7 @@ const deleteListingHandler = async (id) => {
 <template>
   <div class="shadow rounded overflow-hidden flex justify-between mb-4">
     <div class="flex">
-      <img :src="listing.url" alt="" class="w-80 mr-3 h-44" />
+      <img v-if="listing.url" :src="listing.url" alt="" class="w-80 mr-3 h-44" />
       <div class="p-3">
         <h1 class="text-2xl">{{ listing.name }}</h1>
         <p class="text-blue-400">${{ listing.price }}</p>
