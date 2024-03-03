@@ -8,9 +8,11 @@ const user = useSupabaseUser()
 const { $api } = useNuxtApp()
 const { data: Listings, error } = useAsyncData('userListings', async () => {
   const res = await $api.car.fetchUserListings({ listerId: user.value.id })
+  console.log(res)
   return res
 })
 </script>
+
 <template>
   <div>
     <div class="flex justify-between mt-24 items-center">

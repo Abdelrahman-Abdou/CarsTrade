@@ -24,7 +24,6 @@ export default defineEventHandler(async (e) => {
       id: true,
       make: true,
       model: true,
-      year: true,
       price: true,
       image: true,
     },
