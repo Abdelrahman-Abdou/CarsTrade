@@ -17,10 +17,10 @@
 const route = useRoute()
 const listingId = ref(route.params.id)
 console.log(listingId)
-const name = ref()
-const email = ref()
-const phone = ref()
-const message = ref()
+const name = ref('')
+const email = ref('')
+const phone = ref('')
+const message = ref('')
 
 const { $api } = useNuxtApp()
 const submitHandler = async () => {
@@ -34,10 +34,10 @@ const submitHandler = async () => {
   }
   try {
     await $api.car.AddMessage(data)
-    email.value = null
-    name.value = null
-    phone.value = null
-    message.value = null
+    email.value = ''
+    name.value = ''
+    phone.value = ''
+    message.value = ''
 
   } catch (error) {
     throw createError({
