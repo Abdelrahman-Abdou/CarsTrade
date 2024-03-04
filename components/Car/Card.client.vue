@@ -10,8 +10,7 @@ const emit = defineEmits(["favor"]);
 </script>
 
 <template>
-  <div
-    class="
+  <div class="
       relative
       shadow
       border
@@ -20,21 +19,16 @@ const emit = defineEmits(["favor"]);
       mb-5
       cursor-pointer
       h-[200px]
-    "
-  >
-    <img
-      class="absolute w-7 right-5 top-2 z-20"
-      :src="favored ? heartFilled : heartOutline"
-      alt=""
-      @click="emit('favor', car.id)"
-    />
-    <div class="flex h-full" @click="navigateTo(`/car/${car.name}-${car.id}`)">
-      <NuxtImg v-if="car.url" :src="car.url" class="w-[300px] h-full" />
+    ">
+    <img class="absolute w-7 right-5 top-2 z-20" :src="favored ? heartFilled : heartOutline" alt=""
+      @click="emit('favor', car.id)" />
+    <div class="flex h-full" @click="navigateTo(`/car/${car.make}-${car.id}`)">
+      <NuxtImg v-if="car.url" :src="car.image" class="w-[300px] h-full" />
       <div class="p-4 flex flex-col">
         <div>
-          <h1 class="text-2xl text-blue-700">{{ car.name }}</h1>
+          <h1 class="text-2xl text-blue-700">{{ car.make }}</h1>
           <p class="text-gray-700">
-            {{ car.description }}
+            {{ car.model }}
           </p>
         </div>
         <h1 class="mt-auto text-xl">${{ car.price }}</h1>
